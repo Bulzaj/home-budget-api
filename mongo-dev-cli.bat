@@ -1,0 +1,1 @@
+docker exec -it home-budget-dev-db bash

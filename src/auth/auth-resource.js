@@ -6,20 +6,24 @@ const ACCESS_TOKEN_EXPIRATION = process.env.ACCESS_TOKEN_EXPIRATION || "35s";
 const REFRESH_TOKEN_EXPIRATION = process.env.REFRESH_TOKEN_EXPIRATION || "2d";
 
 router.post("/register", async (req, res) => {
-  if (req.body.password !== req.body.passwordAgain)
-    res.status(401).json({ message: "Passwords are not equal" });
+  const errors = [];
 
   const user = new User({
     email: req.body.email,
     password: req.body.password,
   });
 
+  user.arePasswordsSame(req.body.passwordAgain);
+
   try {
     await user.save();
 
     res.status(201).json(user);
   } catch (err) {
-    res.status(401).json(err);
+    const errorsArr = Object.values(err.errors);
+    errorsArr.map((err) => errors.push(err.properties.message));
+
+    res.status(401).json(errors);
   }
 });
 

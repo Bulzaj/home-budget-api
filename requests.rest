@@ -2,9 +2,9 @@ POST http://localhost:8080/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "test_3@sample.com",
+    "email": "test_8@sample.com",
     "password": "secret",
-    "passwordAgain": "secret"
+    "passwordAgain": ""
 }
 
 

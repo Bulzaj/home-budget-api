@@ -48,6 +48,11 @@ UserSchema.methods.arePasswordsSame = function (passwordAgain) {
   }
 };
 
+UserSchema.methods.isPasswordAgain = function (passwordAgain) {
+  if (!passwordAgain || passwordAgain === " ")
+    this.invalidate("passwordAgain", "Password confirmation is required");
+};
+
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

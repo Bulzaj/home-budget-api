@@ -14,6 +14,7 @@ router.post("/register", async (req, res) => {
   });
 
   user.arePasswordsSame(req.body.passwordAgain);
+  user.isPasswordAgain(req.body.passwordAgain);
 
   try {
     await user.save();

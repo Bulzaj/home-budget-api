@@ -48,9 +48,9 @@ UserSchema.methods.arePasswordsSame = function (passwordAgain) {
   }
 };
 
-UserSchema.methods.isPasswordAgain = function (passwordAgain) {
-  if (!passwordAgain || passwordAgain === " ")
-    this.invalidate("passwordAgain", "Password confirmation is required");
+UserSchema.methods.isField = function (field, fieldName, pathName) {
+  if (!field || field === " ")
+    this.invalidate(pathName, `${fieldName} is required`);
 };
 
 const User = mongoose.model("User", UserSchema);

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("./user-model");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
 
 const ACCESS_TOKEN_EXPIRATION = process.env.ACCESS_TOKEN_EXPIRATION || "35s";
 const REFRESH_TOKEN_EXPIRATION = process.env.REFRESH_TOKEN_EXPIRATION || "2d";
@@ -14,7 +15,11 @@ router.post("/register", async (req, res) => {
   });
 
   user.arePasswordsSame(req.body.passwordAgain);
-  user.isPasswordAgain(req.body.passwordAgain);
+  user.isField(
+    req.body.passwordAgain,
+    "Password confirmation",
+    "passwordAgain"
+  );
 
   try {
     await user.save();
@@ -28,14 +33,56 @@ router.post("/register", async (req, res) => {
   }
 });
 
+const validateLoginReq = (req) => {
+  const errors = [];
+
+  if (!req.body.email) {
+    errors.push("Email is required");
+  } else if (!validator.isEmail(req.body.email)) {
+    errors.push("Invalid email address");
+  }
+
+  if (!req.body.password) {
+    errors.push("Password is required");
+  }
+
+  return errors || null;
+};
+
+const validateUser = async (req) => {
+  const result = {};
+
+  const user = await User.findOne({ email: req.body.email });
+
+  if (user && (await user.isPasswordValid(req.body.password))) {
+    result.user = user;
+  } else {
+    result.errors = ["Wrong credentials"];
+  }
+
+  return result;
+};
+
 router.post("/login", async (req, res) => {
+  let errors = [];
+  let user = null;
+
+  errors = validateLoginReq(req);
+
+  if (!errors.length) {
+    const result = await validateUser(req);
+
+    result.errors ? (errors = result.errors) : (user = result.user);
+  }
+
   try {
-    const user = await getUser(req.body.email);
+    if (errors.length) {
+      const error = new Error();
+      error.errors = errors;
+      throw error;
+    }
 
-    if (!(await user.isPasswordValid(req.body.password)))
-      res.status(401).json("Wrong credentials");
-
-    const { accessToken, refreshToken } = await generateTokens({
+    const { accessToken, refreshToken } = generateTokens({
       id: user._id,
       email: user.email,
     });
@@ -43,7 +90,7 @@ router.post("/login", async (req, res) => {
     refreshTokens.push(refreshToken);
     res.json({ accessToken, refreshToken });
   } catch (err) {
-    res.status(401).json({ message: err.message });
+    res.status(401).json(err.errors);
   }
 });
 

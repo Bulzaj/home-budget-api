@@ -24,7 +24,12 @@ router.post("/register", async (req, res) => {
   try {
     await user.save();
 
-    res.status(201).json(user);
+    const { accessToken, refreshToken } = generateTokens({
+      id: user._id,
+      email: user.email,
+    });
+
+    res.status(201).json({ accessToken, refreshToken, email: user.email });
   } catch (err) {
     const errorsArr = Object.values(err.errors);
     errorsArr.map((err) => errors.push(err.properties.message));
@@ -88,7 +93,7 @@ router.post("/login", async (req, res) => {
     });
 
     refreshTokens.push(refreshToken);
-    res.json({ accessToken, refreshToken });
+    res.json({ accessToken, refreshToken, email: user.email });
   } catch (err) {
     res.status(401).json(err.errors);
   }

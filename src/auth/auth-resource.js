@@ -2,9 +2,12 @@ const router = require("express").Router();
 const User = require("./user-model");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+const authenticate = require("./authenticate");
 
-const ACCESS_TOKEN_EXPIRATION = process.env.ACCESS_TOKEN_EXPIRATION || "35s";
-const REFRESH_TOKEN_EXPIRATION = process.env.REFRESH_TOKEN_EXPIRATION || "2d";
+const ACCESS_TOKEN_EXPIRATION =
+  process.env.JWT_ACCESS_TOKEN_EXPIRATION || "35s";
+const REFRESH_TOKEN_EXPIRATION =
+  process.env.JWT_REFRESH_TOKEN_EXPIRATION || "2d";
 
 router.post("/register", async (req, res) => {
   const errors = [];
@@ -125,6 +128,11 @@ router.delete("/logout", (req, res) => {
   res.sendStatus(204);
 });
 
+router.get("/user", authenticate, (req, res) => {
+  const user = req.user;
+  res.status(200).json({ email: user.email });
+});
+
 const generateAccessToken = (user) => {
   return jwt.sign(user, process.env.JWT_ACCESS_KEY, {
     expiresIn: ACCESS_TOKEN_EXPIRATION,
@@ -135,14 +143,6 @@ const generateRefreshToken = (user) => {
   return jwt.sign(user, process.env.JWT_REFRESH_KEY, {
     expiresIn: REFRESH_TOKEN_EXPIRATION,
   });
-};
-
-const getUser = async (email) => {
-  const user = await User.findOne({ email: email });
-
-  if (!user) throw new Error("User does not exists");
-
-  return user;
 };
 
 const generateTokens = (user) => {

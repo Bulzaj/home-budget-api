@@ -14,7 +14,7 @@ POST http://localhost:8080/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "test_1@sample.com",
+    "email": "test@sample.com",
     "password": "secret"
 }
 
@@ -38,43 +38,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/secured HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RfM0BzYW1wbGUuY29tIiwiaWF0IjoxNjMxMTExMTI0LCJleHAiOjE2MzExMTExNTl9.oltg3P5azt-KRmp3KRT17l4mg5vSqbUg6B06Zqo-_iQ
-
-###
-
 GET http://localhost:8080/api/currencies HTTP/1.1
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/budget HTTP/1.1
+GET http://localhost:8080/api/account HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3YzlmZmNkYjFlM2FkYzA4Y2I0YiIsImVtYWlsIjoidGVzdF8xQHNhbXBsZS5jb20iLCJpYXQiOjE2MzI2NzEwOTksImV4cCI6MTYzMjY3Mjg5OX0.nHwpdhB4hne1jogSnXQ4WoRgs0FyD3i3bPd_Wauef2Q
-
-###
-
-GET http://localhost:8080/api/budget/accounts HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3YzlmZmNkYjFlM2FkYzA4Y2I0YiIsImVtYWlsIjoidGVzdF8xQHNhbXBsZS5jb20iLCJpYXQiOjE2MzI2NzEwOTksImV4cCI6MTYzMjY3Mjg5OX0.nHwpdhB4hne1jogSnXQ4WoRgs0FyD3i3bPd_Wauef2Q
-
-###
-
-POST http://localhost:8080/api/budget HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3YzlmZmNkYjFlM2FkYzA4Y2I0YiIsImVtYWlsIjoidGVzdF8xQHNhbXBsZS5jb20iLCJpYXQiOjE2MzI2NzEwOTksImV4cCI6MTYzMjY3Mjg5OX0.nHwpdhB4hne1jogSnXQ4WoRgs0FyD3i3bPd_Wauef2Q
-
-{
-    "accounts": [
-        {
-            "name": "main",
-            "ammount": 21333,
-            "currencyCode": "USD"
-        } ,
-        {
-            "name": "savings",
-            "ammount": 5000,
-            "currencyCode": "USD"
-        }
-    ]
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTRkMzQ2NzU1ODMyM2EyNDFjNTAwNiIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjMyOTQ5NjU2LCJleHAiOjE2MzI5NTE0NTZ9.mZMzvTbHuTo1y9HInd8nAWM3IRW_oMQfLh0C2jfWYjQ

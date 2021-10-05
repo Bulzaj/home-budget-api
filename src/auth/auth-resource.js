@@ -96,7 +96,7 @@ router.post("/login", async (req, res) => {
     });
 
     refreshTokens.push(refreshToken);
-    res.json({ accessToken, refreshToken, email: user.email });
+    res.json({ accessToken, refreshToken, email: user.email, id: user.id });
   } catch (err) {
     res.status(401).json(err.errors);
   }
@@ -130,7 +130,7 @@ router.delete("/logout", (req, res) => {
 
 router.get("/user", authenticate, (req, res) => {
   const user = req.user;
-  res.status(200).json({ email: user.email });
+  res.status(200).json({ email: user.email, id: user.id });
 });
 
 const generateAccessToken = (user) => {

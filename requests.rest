@@ -46,3 +46,9 @@ Content-Type: application/json
 GET http://localhost:8080/api/account HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTRkMzQ2NzU1ODMyM2EyNDFjNTAwNiIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjMyOTQ5NjU2LCJleHAiOjE2MzI5NTE0NTZ9.mZMzvTbHuTo1y9HInd8nAWM3IRW_oMQfLh0C2jfWYjQ
+
+###
+
+GET http://localhost:8080/api/account/6166f57efd696c1c68d8677c/history HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjZmNTdlZmQ2OTZjMWM2OGQ4Njc3NSIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjM0MTQ4ODA3LCJleHAiOjE2MzQxNTA2MDd9.sVCX9T-msipo3v0p9YY181t0iSlWPrjLdMxMltg6ulk

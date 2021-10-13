@@ -26,6 +26,9 @@ const AccountsSchema = Schema({
           },
         },
       },
+      operationsHistory: [
+        { type: Schema.Types.ObjectId, ref: "AccountAction", unique: true },
+      ],
     },
   ],
 });

@@ -21,6 +21,7 @@ app.use("/api/account", account);
 app.listen(8080, async () => {
   console.log("Server is up...");
 
+  // Creating user
   const newUser = {
     email: "test@sample.com",
     password: "secret",
@@ -28,6 +29,7 @@ app.listen(8080, async () => {
 
   const userId = (await devUtils.createUser(newUser))._id;
 
+  // Creating user accounts
   const accountsData = {
     owner: userId,
     accounts: [
@@ -39,7 +41,7 @@ app.listen(8080, async () => {
       {
         name: "Savings",
         ammount: 50000,
-        currencyCode: "USD",
+        currencyCode: "EUR",
       },
       {
         name: "Rainy days cash",
@@ -49,5 +51,47 @@ app.listen(8080, async () => {
     ],
   };
 
-  devUtils.createAccounts(accountsData);
+  const { accounts } = await devUtils.createAccounts(accountsData);
+
+  // Create accounts history
+  const mainAccountHistory = [
+    {
+      type: "INCOME",
+      ammount: 4800,
+      description: "payday :)",
+      category: "SALARY",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 38,
+      description: "new pair of shoes",
+      category: "CLOTHES",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 300,
+      description: "traffic ticket :(",
+      category: "TAX AND ADMINISTRATION",
+    },
+  ];
+
+  const savingsAccountHistory = [
+    {
+      type: "INCOME",
+      ammount: 7000,
+      description: "for darkest hour",
+      category: "TOP UP",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "new tv",
+      category: "CONSUMER ELECTRONICS",
+    },
+  ];
+
+  devUtils.dropCollection("accountactions");
+
+  await devUtils.addAccountHistory(userId, accounts[0], mainAccountHistory);
+  await devUtils.addAccountHistory(userId, accounts[1], savingsAccountHistory);
 });

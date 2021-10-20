@@ -95,122 +95,22 @@ app.listen(8080, async () => {
     },
   ];
 
-  const testAccountHistory = [
-    {
-      type: "INCOME",
-      ammount: 7000,
-      description: "test desc 1",
-      category: "TOP UP",
-    },
-    {
+  const testAccountHistory = [];
+  testAccountHistory.push({
+    type: "INCOME",
+    ammount: 7000,
+    description: "test desc 1",
+    category: "TOP UP",
+  });
+  for (let i = 0; i <= 20; i++) {
+    testAccountHistory.push({
       type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
+      ammount: devUtils.randomInt(20, 5000),
+      description: `test description ${i}`,
       category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-    {
-      type: "EXPENDITURE",
-      ammount: 1300,
-      description: "test description",
-      category: "CONSUMER ELECTRONICS",
-    },
-  ];
+      createdAt: devUtils.randomDate(new Date(2018, 3, 21), new Date()),
+    });
+  }
 
   devUtils.dropCollection("accountactions");
 

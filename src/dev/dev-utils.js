@@ -24,7 +24,7 @@ const createUser = async function (userData) {
 };
 
 const createAccounts = async function (accountsData) {
-  dropCollection("accounts");
+  // dropCollection("accounts");
   console.log(`Create new accounts for user ${accountsData.owner}`);
 
   if (await Accounts.findOne({ owner: accountsData.owner })) {
@@ -62,9 +62,23 @@ const saveAccountActions = async (historyData) => {
   );
 };
 
+const randomDate = (start, end) => {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
+};
+
+const randomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 module.exports = {
   dropCollection,
   createUser,
   createAccounts,
   addAccountHistory,
+  randomDate,
+  randomInt,
 };

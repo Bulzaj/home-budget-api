@@ -13,18 +13,30 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 // get history of specyfic account
-router.get("/:id/history", authenticate, async (req, res) => {
-  const accountId = req.params.id;
-  const { accounts } = await Accounts.findOne({ owner: req.user.id });
+router.get(
+  "/:id/history/from/:begin/to/:now",
+  authenticate,
+  async (req, res) => {
+    const accountId = req.params.id;
+    const from = new Date(req.params.begin);
+    const to = new Date(req.params.now);
 
-  try {
-    const account = accounts.id(accountId);
-    const operations = await fetchOperationsHistory(account.operationsHistory);
-    res.status(200).json(operations);
-  } catch (err) {
-    res.status(404).send(`Account with id ${accountId} does not exists`);
+    console.log(from > to);
+
+    const { accounts } = await Accounts.findOne({ owner: req.user.id });
+
+    try {
+      const account = accounts.id(accountId);
+      const operations = await fetchOperationsHistory(
+        account.operationsHistory
+      );
+      operations.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      res.status(200).json(operations);
+    } catch (err) {
+      res.status(404).send(`Account with id ${accountId} does not exists`);
+    }
   }
-});
+);
 
 const fetchOperationsHistory = async (operations) => {
   return Promise.all(

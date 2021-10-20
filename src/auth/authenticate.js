@@ -7,15 +7,20 @@ const authenticate = (req, res, next) => {
   if (!token) res.sendStatus(401);
 
   jwt.verify(token, process.env.JWT_ACCESS_KEY, async (err, result) => {
-    if (!result) res.sendStatus(403);
-    const user = await User.findOne({ _id: result.id });
-    if (!user || err) {
+    if (!result) {
       res.sendStatus(403);
       next();
-    }
+    } else {
+      const user = await User.findOne({ _id: result.id });
 
-    req.user = result;
-    next();
+      if (!user || err) {
+        res.sendStatus(403);
+        next();
+      }
+
+      req.user = result;
+      next();
+    }
   });
 };
 

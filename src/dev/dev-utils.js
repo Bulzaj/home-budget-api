@@ -24,7 +24,7 @@ const createUser = async function (userData) {
 };
 
 const createAccounts = async function (accountsData) {
-  // dropCollection("accounts");
+  dropCollection("accounts");
   console.log(`Create new accounts for user ${accountsData.owner}`);
 
   if (await Accounts.findOne({ owner: accountsData.owner })) {

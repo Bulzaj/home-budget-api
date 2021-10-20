@@ -48,6 +48,11 @@ app.listen(8080, async () => {
         ammount: 7000,
         currencyCode: "USD",
       },
+      {
+        name: "Test account",
+        ammount: 6874.2,
+        currencyCode: "PLN",
+      },
     ],
   };
 
@@ -90,8 +95,126 @@ app.listen(8080, async () => {
     },
   ];
 
+  const testAccountHistory = [
+    {
+      type: "INCOME",
+      ammount: 7000,
+      description: "test desc 1",
+      category: "TOP UP",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+    {
+      type: "EXPENDITURE",
+      ammount: 1300,
+      description: "test description",
+      category: "CONSUMER ELECTRONICS",
+    },
+  ];
+
   devUtils.dropCollection("accountactions");
 
   await devUtils.addAccountHistory(userId, accounts[0], mainAccountHistory);
   await devUtils.addAccountHistory(userId, accounts[1], savingsAccountHistory);
+  await devUtils.addAccountHistory(userId, accounts[3], testAccountHistory);
 });

@@ -24,7 +24,7 @@ POST http://localhost:8080/api/auth/refresh-token HTTP/1.1
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA2MjNiNWYzZThlMzM0OGZiOTdjMSIsImVtYWlsIjoidGVzdF8xQHNhbXBsZS5jb20iLCJpYXQiOjE2MzI2NTk5ODUsImV4cCI6MTYzMzg2OTU4NX0.Jmh957xJV_09JBoT2O2TYCQb4CcHs8zY7_fGHeZylgk"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzEyZjFhM2Y5ZGQzMDg0OGFkYWYxZiIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjM0ODE4NTU3LCJleHAiOjE2MzYwMjgxNTd9.GpZjwFJDeY1Yvji26p6-cfeXqQ37V1HKro4AKfaR1xs"
 }
 
 ###
@@ -45,10 +45,10 @@ Content-Type: application/json
 
 GET http://localhost:8080/api/account HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTRkMzQ2NzU1ODMyM2EyNDFjNTAwNiIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjMyOTQ5NjU2LCJleHAiOjE2MzI5NTE0NTZ9.mZMzvTbHuTo1y9HInd8nAWM3IRW_oMQfLh0C2jfWYjQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzEyZjFhM2Y5ZGQzMDg0OGFkYWYxZiIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjM0ODE4NTkxLCJleHAiOjE2MzQ4MjAzOTF9.kNq_Ksc-_D2tiHyuLCrjejg-l7nZZldqD-fUNuQLmDM
 
 ###
 
-GET http://localhost:8080/api/account/6166f57efd696c1c68d8677c/history HTTP/1.1
+GET http://localhost:8080/api/history/61715a960a90884510c2ec9b HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjZmNTdlZmQ2OTZjMWM2OGQ4Njc3NSIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjM0MTUwNjQyLCJleHAiOjE2MzQxNTI0NDJ9.FOuIUf2bpfSESN3lmsXvbfIXNaxpWjNMKCxyeDeS_ao
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzEyZjFhM2Y5ZGQzMDg0OGFkYWYxZiIsImVtYWlsIjoidGVzdEBzYW1wbGUuY29tIiwiaWF0IjoxNjM0ODE4NTkxLCJleHAiOjE2MzQ4MjAzOTF9.kNq_Ksc-_D2tiHyuLCrjejg-l7nZZldqD-fUNuQLmDM

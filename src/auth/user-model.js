@@ -29,6 +29,15 @@ const UserSchema = mongoose.Schema({
 
 UserSchema.plugin(uniqueValidator, { message: "Email already taken" });
 
+UserSchema.virtual("accounts", {
+  ref: "Account",
+  localField: "_id",
+  foreignField: "owner",
+});
+
+UserSchema.set("toObject", { virtuals: true });
+UserSchema.set("toJSON", { virtuals: true });
+
 UserSchema.pre("save", async function (next) {
   if (this.password && this.isModified("password")) {
     const hashedPassword = await bcrypt.hash(this.password, SALT_ROUNDS);

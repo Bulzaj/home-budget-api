@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../auth/user-model");
-const Accounts = require("../budget/accounts-model");
-const AccountAction = require("../budget/account-action-model");
+const Account = require("../account/account-model");
+const Operation = require("../history/operation-model");
 
 const dropCollection = async function (collection) {
   console.log(`drop collection: ${collection}`);
@@ -24,42 +24,36 @@ const createUser = async function (userData) {
 };
 
 const createAccounts = async function (accountsData) {
-  // dropCollection("accounts");
-  console.log(`Create new accounts for user ${accountsData.owner}`);
+  await dropCollection("accounts");
+  console.log(`Create new accounts:`);
 
-  if (await Accounts.findOne({ owner: accountsData.owner })) {
-    return await Accounts.findOne({ owner: accountsData.owner });
-  } else {
-    return await new Accounts(accountsData).save();
+  if (!accountsData.length) {
+    console.log("No accounts data provided");
+    return;
   }
-};
 
-const addAccountHistory = async function (ownerId, account, historyData) {
-  if (!account) throw new Error("No account provided");
-  console.log(`Add history to account: ${account.name}`);
-
-  const actionIds = await saveAccountActions(historyData);
-  account.operationsHistory = actionIds;
-
-  if (!ownerId) throw new Error("No accounts ower id provided");
-
-  const accounts = await Accounts.findOne({ owner: ownerId });
-  accounts.accounts
-    .filter((acc) => {
-      return acc._id.equals(account._id);
-    })
-    .map((acc) => (acc.operationsHistory = account.operationsHistory));
-
-  await accounts.save();
-};
-
-const saveAccountActions = async (historyData) => {
-  return Promise.all(
-    historyData.map(async (action) => {
-      const result = await new AccountAction(action).save();
-      return result._id;
+  const resultArr = Promise.all(
+    accountsData.map(async (account) => {
+      const result = await new Account(account).save();
+      console.log(` --${result.name} ${result._id}`);
+      return result;
     })
   );
+
+  return resultArr;
+};
+
+const createOperations = async (historyData) => {
+  await dropCollection("operations");
+  console.log(`Create operations history `);
+  historyData.forEach((data) => {
+    return Promise.all(
+      data.map(async (operation) => {
+        const result = await new Operation(operation).save();
+        return result._id;
+      })
+    );
+  });
 };
 
 const randomDate = (start, end) => {
@@ -78,7 +72,7 @@ module.exports = {
   dropCollection,
   createUser,
   createAccounts,
-  addAccountHistory,
+  createOperations,
   randomDate,
   randomInt,
 };

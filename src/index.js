@@ -9,6 +9,7 @@ const currencies = require("./currencies/currencies-resource");
 const auth = require("./auth/auth-resource");
 const account = require("./account/account-resource");
 const history = require("./history/history-resource");
+const cashFlow = require("./cash-flow/cash-flow-resource");
 
 const devUtils = require("./dev/dev-utils");
 
@@ -20,6 +21,7 @@ app.use("/api/currencies", currencies);
 app.use("/api/auth", auth);
 app.use("/api/account", account);
 app.use("/api/history", history);
+app.use("/api/cash-flow", cashFlow);
 
 app.listen(8080, async () => {
   console.log("Server is up...");

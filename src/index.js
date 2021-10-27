@@ -9,7 +9,7 @@ const currencies = require("./currencies/currencies-resource");
 const auth = require("./auth/auth-resource");
 const account = require("./account/account-resource");
 const history = require("./history/history-resource");
-const cashFlow = require("./cash-flow/cash-flow-resource");
+const spec = require("./specification/specification-resource");
 
 const devUtils = require("./dev/dev-utils");
 
@@ -21,7 +21,7 @@ app.use("/api/currencies", currencies);
 app.use("/api/auth", auth);
 app.use("/api/account", account);
 app.use("/api/history", history);
-app.use("/api/cash-flow", cashFlow);
+app.use("/api/spec", spec);
 
 app.listen(8080, async () => {
   console.log("Server is up...");
@@ -72,6 +72,7 @@ app.listen(8080, async () => {
       description: "payday :)",
       category: "SALARY",
       account: accounts[0]._id,
+      currentBalance: 8500,
     },
     {
       type: "EXPENDITURE",
@@ -79,6 +80,7 @@ app.listen(8080, async () => {
       description: "new pair of shoes",
       category: "CLOTHES",
       account: accounts[0]._id,
+      currentBalance: 8462,
     },
     {
       type: "EXPENDITURE",
@@ -86,6 +88,7 @@ app.listen(8080, async () => {
       description: "traffic ticket :(",
       category: "TAX AND ADMINISTRATION",
       account: accounts[0]._id,
+      currentBalance: 8162,
     },
   ];
 
@@ -96,6 +99,7 @@ app.listen(8080, async () => {
       description: "for darkest hour",
       category: "TOP UP",
       account: accounts[1]._id,
+      currentBalance: 14000,
     },
     {
       type: "EXPENDITURE",
@@ -103,26 +107,31 @@ app.listen(8080, async () => {
       description: "new tv",
       category: "CONSUMER ELECTRONICS",
       account: accounts[1]._id,
+      currentBalance: 12700,
     },
   ];
 
   const testAccountHistory = [];
+  const testAccountStartBalance = 30000;
   testAccountHistory.push({
     type: "INCOME",
     ammount: 7000,
     description: "test desc 1",
     category: "TOP UP",
     account: accounts[3]._id,
+    currentBalance: 21300,
   });
 
   for (let i = 0; i <= 20; i++) {
+    const operationAmmount = devUtils.randomInt(20, 5000);
     testAccountHistory.push({
       type: "EXPENDITURE",
-      ammount: devUtils.randomInt(20, 5000),
+      ammount: operationAmmount,
       description: `test description ${i}`,
       category: "CONSUMER ELECTRONICS",
       createdAt: devUtils.randomDate(new Date(2018, 3, 21), new Date()),
       account: accounts[3]._id,
+      currentBalance: testAccountStartBalance - operationAmmount,
     });
   }
 

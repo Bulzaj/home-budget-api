@@ -48,6 +48,10 @@ const OperationSchema = mongoose.Schema(
         return "Wrong category";
       },
     },
+    currentBalance: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

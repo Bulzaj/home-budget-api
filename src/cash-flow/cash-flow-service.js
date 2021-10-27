@@ -3,7 +3,6 @@ const { getHistory } = require("../history/history-service");
 const getExpenditures = async (accountId, from, to) => {
   const expenditures = await getHistory(accountId, from, to, "EXPENDITURE");
 
-  console.log(expenditures);
   const result = {};
 
   expenditures.forEach((element) => {

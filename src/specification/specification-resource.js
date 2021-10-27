@@ -13,11 +13,11 @@ router.get("/expenditures/:accountId", authenticate, async (req, res) => {
   }
 });
 
-router.get("/spec/:accountId", authenticate, (req, res) => {
+router.get("/cash-flow/:accountId", authenticate, async (req, res) => {
   const { accountId, from, to } = spec.getQueriesFromReq(req);
 
   try {
-    const result = spec.getCashFlow(accountId, from, to);
+    const result = await spec.getCashFlow(accountId, from, to);
     res.status(200).json(result);
   } catch (err) {
     res.status(404).json(err);

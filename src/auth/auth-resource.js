@@ -102,7 +102,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// TODO: move refresh tokens to db or cache (redis? )
 let refreshTokens = [];
 
 router.post("/refresh-token", (req, res) => {

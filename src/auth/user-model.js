@@ -16,7 +16,6 @@ const UserSchema = mongoose.Schema({
       message: "Wrong email",
     },
   },
-  // TODO: hide password
   password: {
     type: String,
     required: [true, "Password is required"],

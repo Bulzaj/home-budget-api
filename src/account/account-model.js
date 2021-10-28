@@ -11,7 +11,6 @@ const AccountSchema = Schema({
     type: Number,
     default: 0,
   },
-  // TODO: Add enum with currency codes
   currencyCode: {
     type: String,
     required: true,

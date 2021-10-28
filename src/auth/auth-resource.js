@@ -114,8 +114,8 @@ router.post("/refresh-token", (req, res) => {
   jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, async (err, user) => {
     if (err) return res.sendStatus(403);
 
-    const accessToken = await generateAccessToken({
-      id: user._id,
+    const accessToken = generateAccessToken({
+      id: user.id,
       email: user.email,
     });
 
@@ -140,9 +140,12 @@ const generateAccessToken = (user) => {
 };
 
 const generateRefreshToken = (user) => {
-  return jwt.sign(user, process.env.JWT_REFRESH_KEY, {
+  const result = jwt.sign(user, process.env.JWT_REFRESH_KEY, {
     expiresIn: REFRESH_TOKEN_EXPIRATION,
   });
+
+  refreshTokens.push(result);
+  return result;
 };
 
 const generateTokens = (user) => {
